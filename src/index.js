@@ -9,6 +9,9 @@ import './assets/fonts/iconfont.css'
 // 最后导入我们自己的样式文件
 import './index.css'
 
+// 导入axios
+import './utils/axios'
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

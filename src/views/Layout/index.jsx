@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import Styles from './index.module.scss'
 
 // 导入路由
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
 // 导入TabBar
 import { TabBar } from 'antd-mobile'
@@ -47,7 +47,7 @@ export default class index extends Component {
     }
   ]
 
-  // 内容变化 tabBar的选中状态就应该同步过来   
+  // 内容变化 tabBar的选中状态就应该同步过来(多执行一次render)
   componentDidUpdate(prevProps) {
     //   console.log('--------componentDidUpdate--------')
     //   console.log(prevProps)
@@ -59,6 +59,8 @@ export default class index extends Component {
     }
   }
 
+  
+
   // tabbar 渲染部分
   renderTabBar = () => {
     return (
@@ -68,8 +70,8 @@ export default class index extends Component {
             <TabBar.Item
               title="item.title"
               key="item.path"
-              icon={ <i className={`iconfont ${item.icon}`} /> }
-              selectedIcon={ <i className={`iconfont ${item.icon}`} /> }
+              icon={<i className={`iconfont ${item.icon}`} />}
+              selectedIcon={<i className={`iconfont ${item.icon}`} />}
               selected={this.state.selectedTab === item.path}
               onPress={() => {
                 // this.setState({
@@ -79,8 +81,7 @@ export default class index extends Component {
                 if (this.state.selectedTab === item.path) return
                 this.props.history.push(item.path)
               }}
-            >
-            </TabBar.Item>
+            ></TabBar.Item>
           )
         })}
       </TabBar>
@@ -90,17 +91,18 @@ export default class index extends Component {
   render() {
     return (
       <div className={Styles.layout}>
-        {/* 变化的部分，使用嵌套路由 */}
-        <Route path="/layout/home" component={Home} />
-        <Route path="/layout/houselist" component={HouseList} />
-        <Route path="/layout/info" component={Info} />
-        <Route path="/layout/my" component={My} />
-        <Redirect exact from="/layout" to="/layout/home" />
+        <Switch>
+          {/* 变化的部分，使用嵌套路由 */}
+          <Route path="/layout/home" component={Home} />
+          <Route path="/layout/houselist" component={HouseList} />
+          <Route path="/layout/info" component={Info} />
+          <Route path="/layout/my" component={My} />
+          <Redirect exact from="/layout" to="/layout/home" />
+        </Switch>
 
-        {/* tabBar */}
-        <div className={ Styles.tabbar }>{this.renderTabBar()}</div>
+          {/* tabBar */}
+          <div className={Styles.tabbar}>{this.renderTabBar()}</div>
       </div>
     )
   }
-
 }

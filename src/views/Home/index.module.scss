@@ -8,7 +8,7 @@
 
 // 导航
 .nav {
-  padding: 30px 0 0 0;
+  padding: 10px 0 0 0;
   background-color: #fff;
   :global {
     .am-flexbox-item {
@@ -143,9 +143,5 @@
     width: 100%;
     color: #9c9fa1;
     font-size: 12px;
-  }
-
-  .messageTitle {
-    margin-bottom: 48px;
   }
 }
